@@ -68,7 +68,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=SqlServer#2026!" -p 1433:143
 Luego ejecutar el script de creacion de tablas en DBeaver:
 - `script/crearTablas.sql`
 
-```
+
 
 ### Crear entorno virtual
 
