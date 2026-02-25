@@ -37,6 +37,37 @@ El proceso:
 
 ![Modelo multidimensional](imgs/modeloMultidimensional.png)
 
+### Justificación del modelo estrella
+
+Se eligió el **modelo estrella** porque:
+- **Simplicidad**: Las consultas analíticas requieren menos JOINs, facilitando su escritura y mantenimiento.
+- **Rendimiento**: Al desnormalizar las dimensiones, las consultas son más rápidas que en modelos normalizados.
+
+### Identificación de la tabla de hechos
+
+La tabla de hechos **fact_vuelo** se identificó como el elemento central al analizar el dataset, ya que:
+- Representa el **evento de negocio principal**: una reserva de vuelo.
+- Contiene las **métricas cuantificables**: duración, precio del ticket, retraso, número de maletas.
+- La **granularidad** es un registro por cada reserva individual (pasajero + vuelo + fecha).
+
+### Identificación de las dimensiones
+
+Del análisis del dataset se extrajeron 6 dimensiones que contextualizan los hechos:
+
+1. **dim_tiempo**: Para análisis temporales (tendencias mensuales, estacionalidad). Se crearon dos claves: fecha de reserva y fecha de vuelo.
+
+2. **dim_aerolinea**: Para comparar desempeño entre aerolíneas (código y nombre).
+
+3. **dim_ruta**: Para análisis geográficos (origen, destino, distancia).
+
+4. **dim_pasajero**: Para segmentación demográfica (edad, género, nacionalidad, viajero frecuente).
+
+5. **dim_venta**: Para análisis del proceso comercial (canal de venta, método de pago, tipo de viajero).
+
+6. **dim_vuelo_detalle**: Para características operacionales (tipo de aeronave, clase de cabina, escalas).
+
+Cada dimensión agrupa atributos descriptivos relacionados, evitando redundancia en la tabla de hechos y optimizando el almacenamiento.
+
 ---
 
 ## Tecnologías utilizadas
