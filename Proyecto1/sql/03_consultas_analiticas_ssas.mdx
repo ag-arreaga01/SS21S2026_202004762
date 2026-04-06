@@ -1,0 +1,85 @@
+/*
+   Proyecto 1 - Consultas analiticas SSAS (MDX)
+   Estructura espejo de 02_validaciones_dw.sql (seccion 5).
+
+  Como ejecutar:
+  1) Abrir SSMS.
+  2) Tipo de servidor: Analysis Services.
+  3) Servidor: localhost (o localhost\\AS2022 segun instancia).
+  4) Seleccionar base/cubo SGFood_SSAS / SGFoodDW.
+  5) Ejecutar cada consulta MDX.
+*/
+
+/* =========================================================
+   5.1) Totales generales
+   ========================================================= */
+SELECT
+{
+    [Measures].[Cantidad Vendida],
+    [Measures].[Importe Neto],
+    [Measures].[Margen Estimado]
+} ON COLUMNS
+FROM [SGFoodDW];
+
+/* =========================================================
+   5.2) Importe Neto por categoria
+   ========================================================= */
+SELECT
+{ [Measures].[Importe Neto] } ON COLUMNS,
+NON EMPTY
+[Dim Producto].[Categoria].[Categoria].MEMBERS ON ROWS
+FROM [SGFoodDW];
+
+/* =========================================================
+   5.3) Cantidad e Importe por canal
+   ========================================================= */
+SELECT
+{
+    [Measures].[Cantidad Vendida],
+    [Measures].[Importe Neto]
+} ON COLUMNS,
+NON EMPTY
+[Dim Canal].[CanalVenta].[CanalVenta].MEMBERS ON ROWS
+FROM [SGFoodDW];
+
+/* =========================================================
+   5.4) Importe Neto por anio y mes
+   ========================================================= */
+SELECT
+{ [Measures].[Importe Neto] } ON COLUMNS,
+NON EMPTY
+[Dim Fecha].[Jerarquía Tiempo].[Mes].MEMBERS ON ROWS
+FROM [SGFoodDW];
+
+/* =========================================================
+   5.5) Top 5 productos por Importe Neto
+   ========================================================= */
+SELECT
+{ [Measures].[Importe Neto] } ON COLUMNS,
+TOPCOUNT(
+    NONEMPTY([Dim Producto].[Producto Nombre].[Producto Nombre].MEMBERS, [Measures].[Importe Neto]),
+    5,
+    [Measures].[Importe Neto]
+) ON ROWS
+FROM [SGFoodDW];
+
+/* =========================================================
+   5.6) Importe Neto por municipio
+   ========================================================= */
+SELECT
+{ [Measures].[Importe Neto] } ON COLUMNS,
+NON EMPTY
+[Dim Ubicacion].[Municipio].[Municipio].MEMBERS ON ROWS
+FROM [SGFoodDW];
+
+/* =========================================================
+   5.7) Cruce categoria x anio
+   ========================================================= */
+SELECT
+{ [Measures].[Importe Neto] } ON COLUMNS,
+NON EMPTY
+CROSSJOIN(
+    [Dim Producto].[Categoria].[Categoria].MEMBERS,
+    [Dim Fecha].[Jerarquía Tiempo].[Anio].MEMBERS
+) ON ROWS
+FROM [SGFoodDW];

@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37111.16 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "SGFood_ETL_SIS2", "SGFood_ETL_SIS2\SGFood_ETL_SIS2.dtproj", "{06478EB0-665F-AEA9-C707-F0040E615320}"
+EndProject
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "SGFood_SSAS_SIS2", "SGFood_SSAS_SIS2\SGFood_SSAS_SIS2.dwproj", "{B3E56690-2982-57EC-4AB4-28EDCF094CAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06478EB0-665F-AEA9-C707-F0040E615320}.Development|Default.ActiveCfg = Development
+		{06478EB0-665F-AEA9-C707-F0040E615320}.Development|Default.Build.0 = Development
+		{B3E56690-2982-57EC-4AB4-28EDCF094CAC}.Development|Default.ActiveCfg = Development
+		{B3E56690-2982-57EC-4AB4-28EDCF094CAC}.Development|Default.Build.0 = Development
+		{B3E56690-2982-57EC-4AB4-28EDCF094CAC}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF9E5A57-22B0-4A31-AEC6-30FD473D7C3D}
+	EndGlobalSection
+EndGlobal
